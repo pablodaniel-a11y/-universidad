@@ -22,18 +22,42 @@ export default function FlashMessage() {
     const message = flash.success || flash.error;
 
     return (
-        <div className={`p-4 rounded-xl border flex items-start gap-3 shadow-sm ${
-            isSuccess ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'
-        }`}>
+        <div
+            className={`flex items-start gap-3 rounded-xl border p-4 shadow-sm ${
+                isSuccess
+                    ? 'border-green-200 bg-green-50 text-green-800'
+                    : 'border-red-200 bg-red-50 text-red-800'
+            }`}
+        >
             {/* Icono Dinámico (Éxito o Error) */}
             <div className="flex-shrink-0">
                 {isSuccess ? (
-                    <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    <svg
+                        className="h-5 w-5 text-green-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5 13l4 4L19 7"
+                        />
                     </svg>
                 ) : (
-                    <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                        className="h-5 w-5 text-red-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
                     </svg>
                 )}
             </div>
@@ -50,15 +74,25 @@ export default function FlashMessage() {
             <button
                 type="button"
                 onClick={() => setVisible(false)}
-                className={`flex-shrink-0 p-1.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                className={`flex-shrink-0 rounded-lg p-1.5 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${
                     isSuccess
-                        ? 'hover:bg-green-100 text-green-500 focus:ring-green-500 focus:ring-offset-green-50'
-                        : 'hover:bg-red-100 text-red-500 focus:ring-red-500 focus:ring-offset-red-50'
+                        ? 'text-green-500 hover:bg-green-100 focus:ring-green-500 focus:ring-offset-green-50'
+                        : 'text-red-500 hover:bg-red-100 focus:ring-red-500 focus:ring-offset-red-50'
                 }`}
                 aria-label="Cerrar notificación"
             >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
                 </svg>
             </button>
         </div>
