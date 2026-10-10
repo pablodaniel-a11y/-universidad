@@ -15,13 +15,15 @@ type PageProps = {
     auth: Auth;
 };
 
-export default function Profile(/*{
+export default function Profile(
+    /*{
     mustVerifyEmail,
     status,
 }: {
     mustVerifyEmail: boolean;
     status?: string;
-}*/) {
+}*/
+) {
     const { auth } = usePage<PageProps>().props;
 
     return (
