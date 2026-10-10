@@ -1,5 +1,5 @@
 import { Form, Head, usePage } from '@inertiajs/react';
-import { Link } from '@inertiajs/react';
+//import { Link } from '@inertiajs/react';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import DeleteUser from '@/components/delete-user';
 import Heading from '@/components/heading';
@@ -16,8 +16,8 @@ type PageProps = {
 };
 
 export default function Profile({
-    mustVerifyEmail,
-    status,
+    /*mustVerifyEmail,
+    status,*/
 }: {
     mustVerifyEmail: boolean;
     status?: string;

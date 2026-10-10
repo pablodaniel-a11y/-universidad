@@ -1,3 +1,14 @@
+//import React from 'react';
+
+export default function VerifyEmail() {
+    return (
+        <div>
+            {/* Verificación de email deshabilitada */}
+        </div>
+    );
+}
+
+
 /*
 // Components
 import { Form, Head } from '@inertiajs/react';

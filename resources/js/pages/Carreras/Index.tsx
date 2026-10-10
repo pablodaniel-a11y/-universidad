@@ -32,7 +32,7 @@ import {
     Plus,
     Search,
     Trash2,
-    Table as TableIcon,
+    //Table as TableIcon,
 } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
@@ -111,6 +111,7 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
         window.location.href = `/carreras/export?${params}`;
     };
 
+    /*
     const indicadorOrden = (campo: string) => {
         if (orden !== campo) {
             return '';
@@ -118,6 +119,7 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
 
         return direccion === 'asc' ? ' ↑' : ' ↓';
     };
+    */
 
     const ordenarPor = (campo: string) => {
         let nuevaDireccion = 'asc';
