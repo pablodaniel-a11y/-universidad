@@ -35,6 +35,7 @@ import {
     //Table as TableIcon,
 } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
+import { useAuth } from '@/hooks/use-auth'; //importamos el hook personalizado para verificar permisos
 
 interface Filtros {
     buscar: string;
@@ -96,6 +97,8 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
     const [porPagina, setPorPagina] = useState(filtros.por_pagina ?? 5);
 
     const [direccion, setDireccion] = useState(filtros.direccion ?? 'asc');
+
+    const { can } = useAuth(); //Inicializamos la función 'can' para verificar permisos
 
     const handleExportExcel = () => {
         // Creamos la query string basándonos en los filtros actuales de la vista
@@ -170,6 +173,17 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
                         Gestión y listado de las carreras del sistema.
                     </p>
                 </div>
+
+                {/*Ocultar botón de Crear Carrera */} 
+                {can('crear carreras') && ( 
+                <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"> 
+                    <Link href="/carreras/create"> 
+                        <Plus className="w-4 h-4 mr-2" /> 
+                        Nueva carrera 
+                    </Link> 
+                </Button>)}
+                
+                {/*  
                 <Button
                     asChild
                     className="bg-indigo-600 text-white shadow-sm hover:bg-indigo-700"
@@ -179,6 +193,7 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
                         Nueva carrera
                     </Link>
                 </Button>
+                */}
             </div>
 
             {flash?.success && <div>{flash.success}</div>}
@@ -378,6 +393,23 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
                                         <TableCell className="px-6 py-4 text-right whitespace-nowrap">
                                             <div className="flex items-center justify-end gap-1.5">
                                                 {/* Botón Ver */}
+                                                {/* Ocultar botones de acción por fila */} 
+                                                {can('ver carreras') && (    
+                                                    <Button 
+                                                        asChild 
+                                                        variant="ghost" 
+                                                        size="sm" 
+                                                        className="h-8 text-slate-600 hover:text-slate-900" 
+                                                        title="Ver detalles de la carrera" 
+                                                    > 
+                                                        <Link href={`/carreras/${carrera.id}`}> 
+                                                            <Eye className="w-4 h-4 mr-1.5" /> 
+                                                            Ver 
+                                                        </Link> 
+                                                    </Button>
+                                                )} 
+                                                {/* ...Y aplicamos la misma lógica para el resto de las acciones */}
+                                                {/* 
                                                 <Button
                                                     asChild
                                                     variant="ghost"
@@ -392,6 +424,7 @@ export default function Index({ carreras, materias, filtros, flash }: Props) {
                                                         Ver
                                                     </Link>
                                                 </Button>
+                                                */}
 
                                                 {/* Botón Editar */}
                                                 <Button
