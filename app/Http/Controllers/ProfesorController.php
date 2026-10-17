@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+//namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Profesor;
@@ -10,6 +11,8 @@ use Inertia\Inertia;
 use App\Http\Requests\StoreProfesorRequest;
 use App\Http\Requests\UpdateProfesorRequest;
 use Illuminate\Support\Facades\Storage;
+//use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+//use App\Http\Resources\ProfesorResource;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 
@@ -29,9 +32,15 @@ class ProfesorController extends Controller
         ]);
         */
 
+        
         return Inertia::render('Profesores/Index', [
             'profesores' => Profesor::with('materias')->latest()->get(),
         ]);
+        
+
+    
+        //return ProfesorResource::collection(Profesor::with('materias')->latest()->get());
+
     }
 
     /**
@@ -56,16 +65,18 @@ class ProfesorController extends Controller
             $validated['foto'] = $request->file('foto')->store('profesores', 'public');
         }
 
-        Profesor::create($validated);
+        $profesor = Profesor::create($validated);
 
         // Sincronizar materias si se envían
         if (isset($validated['materias'])) {
             $profesor->materias()->sync($validated['materias']);
         }
 
+        
         return redirect()
             ->route('profesores.index')
             ->with('success', 'Profesor creado correctamente.');
+        //return new ProfesorResource($profesor->load('materias'));
     }
 
     /**
@@ -74,6 +85,7 @@ class ProfesorController extends Controller
     public function show(Profesor $profesor): RedirectResponses
     {
         return redirect()->route('profesores.edit', $profesor);
+        //return new ProfesorResource($profesor->load('materias'));
     }
 
     /**
@@ -141,6 +153,7 @@ class ProfesorController extends Controller
         return redirect()
             ->route('profesores.index')
             ->with('success', 'Profesor actualizado correctamente.');
+        //return new ProfesorResource($profesor->load('materias'));
     }
 
     /**
@@ -154,6 +167,7 @@ class ProfesorController extends Controller
 
         $profesor->delete();
 
+        //return response()->noContent();
         return redirect()
             ->route('profesores.index')
             ->with('success', 'Profesor eliminado correctamente.');

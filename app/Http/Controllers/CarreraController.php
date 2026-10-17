@@ -12,6 +12,7 @@ use App\Models\Carrera;
 use Inertia\Inertia;
 use App\Models\Materia;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 use App\Exports\CarrerasExport; 
 use Maatwebsite\Excel\Facades\Excel;
@@ -29,6 +30,7 @@ class CarreraController extends Controller
     #[Middleware('permission:listar carreras')]
     public function index(Request $request)
     {
+        Log::info('Se ingresó a Carreras');
         $buscar = trim($request->input('buscar', '')); 
         $materia = $request->input('materia', '');
 
@@ -110,6 +112,9 @@ class CarreraController extends Controller
     #[Middleware('permission:ver carreras')]
     public function show(Carrera $carrera)
     {
+        Log::info('Se ingresó al listado de carreras', [ 
+            'usuario_id' => auth()->id(), 
+        ]);
         $carrera->load('materias'); 
  
         return Inertia::render('Carreras/Show', [ 

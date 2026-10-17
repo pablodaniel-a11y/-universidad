@@ -11,6 +11,12 @@ use App\Http\Controllers\UserController;
 
 Route::inertia('/', 'welcome')->name('home');
 
+/*
+Route::get('/prueba-error', function () { 
+    throw new Exception('Error generado para la práctica'); 
+});
+*/ 
+
 Route::resource('roles', RoleController::class); 
 Route::resource('permissions', PermissionController::class)->except(['show', 'edit', 'create']);// Exceptuamos create, show y edit 
 //porque se gestionan dinámicamente en el index con formularios reactivos en línea.
